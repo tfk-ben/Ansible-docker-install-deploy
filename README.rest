@@ -1,0 +1,17 @@
+===============================
+Install docker and deploy docker-compose with Ansible 
+===============================
+
+first you should create project-vars file and put : 
+docker_username:your-dockerhub-username
+docker_password:your-password-or-token
+
+and you should create hosts file and put : 
+server_ip ansible_ssh_private_key_file=path_of_key ansible_user=server_user
+
+and run configuration with :
+
+.. code-block:: sh
+
+    $ ansible-playbook -i hosts Docker_app.yaml
+
