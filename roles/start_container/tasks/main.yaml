@@ -1,0 +1,16 @@
+ 
+    - name: copy docker-compose from local machine to server
+      copy:
+        src: Docker-compose.yaml #as long as we have it in "files" file we dont need to set path
+        dest: /home/ec2-user/docker-compose.yaml
+
+    - name: docker login
+      docker_login: 
+        registry_url: "{{docker_registry}}" #for dockerhub and this is the default one
+        username: "{{docker_username}}"  
+        password: "{{docker_password}}" #we can put it: in variables file / in the command to do it we add vars_prompt
+                                                                    #so after executing command ansible ask for password
+    - name: start conrainer
+      community.docker.docker_compose:
+        project_src: /home/ec2-user
+        state: present # equivalent of docker compose up
